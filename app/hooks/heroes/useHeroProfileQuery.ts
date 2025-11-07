@@ -1,0 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+
+import { getHeroProfile } from "~/lib/api/heroes";
+
+const useHeroProfileQuery = () => {
+  const heroId = useParams()?.heroId || "";
+  return useQuery({
+    queryKey: ["hero-profile", heroId],
+    queryFn: async () => {
+      const heroProfile = await getHeroProfile(heroId);
+      return heroProfile;
+    },
+    enabled: !!heroId,
+    initialData: null,
+  });
+};
+
+export default useHeroProfileQuery;

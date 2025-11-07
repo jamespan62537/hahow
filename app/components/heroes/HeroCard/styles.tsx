@@ -1,16 +1,20 @@
 import { styled } from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
   width: 200px;
   height: 280px;
-  background-color: #f0f0f0;
+  background-color: ${({ isSelected }) => (isSelected ? "#000000e6" : "#fff")};
   border-radius: 7px;
   padding: 10px;
   justify-content: space-between;
+  color: ${({ isSelected }) => (isSelected ? "#fff" : "#000")};
+  transition:
+    background-color 0.1s ease-in-out,
+    color 0.1s ease-in-out;
 `;
 
 export const HeroName = styled.div`
