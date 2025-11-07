@@ -37,7 +37,10 @@ const HeroProfile = ({
     usePointCalculation(heroProfile);
 
   // TODO: Add error handler
-  const handleSaveAttributes = async () => await patchHeroProfile(heroId, profile);
+  const handleSaveAttributes = async () => {
+    if (remainingPoints > 0) return;
+    await patchHeroProfile(heroId, profile);
+  };
 
   return (
     <Container>
@@ -63,7 +66,12 @@ const HeroProfile = ({
       </AttributesBlock>
       <InfoBlock>
         <RemainingPoints>剩餘點數：{remainingPoints}</RemainingPoints>
-        <SaveButton onClick={handleSaveAttributes}>儲存</SaveButton>
+        <SaveButton
+          disabled={remainingPoints > 0}
+          onClick={handleSaveAttributes}
+        >
+          儲存
+        </SaveButton>
       </InfoBlock>
     </Container>
   );

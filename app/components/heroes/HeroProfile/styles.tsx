@@ -72,10 +72,17 @@ export const RemainingPoints = styled.div`
   align-self: end;
 `;
 
-export const SaveButton = styled.button`
+export const SaveButton = styled.div<{ disabled: boolean }>`
+  grid-row: 3;
   padding: 4px 50px;
   border: 1px solid #000;
   border-radius: 4px;
   cursor: pointer;
   grid-row: 4;
+  ${({ disabled }: { disabled: boolean }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
 `;
