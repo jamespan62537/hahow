@@ -12,7 +12,6 @@ const useHeroProfileQuery = () => {
       return heroProfile;
     },
     enabled: !!heroId,
-    initialData: null,
   });
 };
 

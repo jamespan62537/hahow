@@ -9,7 +9,7 @@ const HeroCard = ({ hero }: { hero: HeroType }) => {
 
   return (
     <Container isSelected={isHeroCardSelected}>
-      <StyledImage src={hero.image} alt={hero.name} />
+      <StyledImage src={hero.image} alt={hero.name} loading="lazy" />
       <HeroName>{hero.name}</HeroName>
     </Container>
   );

@@ -9,7 +9,6 @@ const useHeroesListQuery = () =>
       const heroes = await getHeroes();
       return heroes;
     },
-    initialData: [],
   });
 
 export default useHeroesListQuery;
