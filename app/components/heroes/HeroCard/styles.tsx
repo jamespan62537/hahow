@@ -5,8 +5,8 @@ export const Container = styled.div<{ isSelected: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 280px;
+  width: 150px;
+  height: 200px;
   background-color: ${({ isSelected }) => (isSelected ? "#000000e6" : "#fff")};
   border-radius: 7px;
   padding: 10px;
