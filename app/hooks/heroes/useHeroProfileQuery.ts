@@ -8,8 +8,8 @@ const useHeroProfileQuery = () => {
   return useQuery({
     queryKey: ["hero-profile", heroId],
     queryFn: async () => {
-      const heroProfile = await getHeroProfile(heroId);
-      return heroProfile;
+      const response = await getHeroProfile(heroId);
+      return response;
     },
     enabled: !!heroId,
   });

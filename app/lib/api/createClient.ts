@@ -1,4 +1,5 @@
 import axios from "axios";
+import { errorHandler } from "./api";
 
 function createClient(config = {}) {
   const defaultConfig = {
@@ -7,7 +8,7 @@ function createClient(config = {}) {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    validateStatus: (status: number) => status >= 200 && status <= 500,
+    validateStatus: (status: number) => status >= 200 && status < 300,
   };
 
   const API = axios.create({ ...defaultConfig, ...config });
@@ -16,9 +17,14 @@ function createClient(config = {}) {
     return config;
   });
 
-  API.interceptors.response.use(async (response) => {
-    return response;
-  });
+  API.interceptors.response.use(
+    async (response) => {
+      return response;
+    },
+    (error) => {
+      return Promise.reject(errorHandler(error));
+    }
+  );
 
   return API;
 }

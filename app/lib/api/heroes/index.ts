@@ -1,35 +1,32 @@
 import API from "../createClient";
 import type { HeroType, HeroProfileType } from "./types";
 
-const getHeroes = async (): Promise<HeroType[]> => {
+export const getHeroes = async (): Promise<HeroType[]> => {
   try {
     const response = await API.get("/heroes");
     return response.data;
   } catch (error) {
-    console.error("Error fetching heroes", error);
-    return [];
+    throw error
   }
 };
 
-const getHeroProfile = async (
+export const getHeroProfile = async (
   heroId: string
 ): Promise<HeroProfileType | null> => {
   try {
     const response = await API.get(`/heroes/${heroId}/profile`);
     return response.data;
   } catch (error) {
-    return null;
+    throw error
   }
 };
 
-const patchHeroProfile = async (heroId: string, profile: HeroProfileType) => {
+export const patchHeroProfile = async (heroId: string, profile: HeroProfileType) => {
   try {
     const response = await API.patch(`/heroes/${heroId}/profile`, profile);
     return response.data;
   } catch (error) {
-    console.error("Error patching hero profile", error);
-    return null;
+    throw error
   }
 };
 
-export { getHeroes, getHeroProfile, patchHeroProfile };
