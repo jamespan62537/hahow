@@ -16,6 +16,7 @@ import type { HeroProfileType } from "~/lib/api/heroes/types";
 import usePointCalculation from "~/hooks/heroes/usePointCalculation";
 import useHeroProfileMutation from "~/hooks/heroes/useHeroProfileMutation";
 import Loading from "~/components/common/Loading";
+import useHeroesStore from "~/lib/stores/heroes/heroesStore";
 
 type AttributeKey = "str" | "int" | "agi" | "luk";
 
@@ -35,13 +36,14 @@ const HeroProfile = ({
 
   const heroId = useParams()?.heroId || "";
   const { mutateAsync: patchHeroProfile, isPending } = useHeroProfileMutation();
+  const { setIsEdited } = useHeroesStore();
 
   const { profile, remainingPoints, onDecrease, onIncrease } =
     usePointCalculation(heroProfile);
 
-  // TODO: Add error handler
   const handleSaveAttributes = async () => {
     if (remainingPoints > 0) return;
+    setIsEdited(false);
     await patchHeroProfile({ heroId, profile });
   };
 

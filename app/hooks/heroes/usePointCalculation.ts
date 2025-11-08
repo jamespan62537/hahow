@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 
 import type { HeroProfileType } from "~/lib/api/heroes/types";
+import useHeroesStore from "~/lib/stores/heroes/heroesStore";
 
 type State = {
   profile: HeroProfileType;
@@ -66,13 +67,18 @@ const reducer = (state: State, action: Action): State => {
  * }
  */
 const usePointCalculation = (initialAttributes: HeroProfileType) => {
+  const { isEdited, setIsEdited } = useHeroesStore();
   const [state, dispatch] = useReducer(reducer, initialAttributes, initState);
 
-  const onDecrease = (attribute: keyof HeroProfileType) =>
+  const onDecrease = (attribute: keyof HeroProfileType) => {
+    !isEdited && setIsEdited(true);
     dispatch({ type: "DECREASE", payload: { attribute } });
+  };
 
-  const onIncrease = (attribute: keyof HeroProfileType) =>
+  const onIncrease = (attribute: keyof HeroProfileType) => {
+    !isEdited && setIsEdited(true);
     dispatch({ type: "INCREASE", payload: { attribute } });
+  };
 
   useEffect(() => {
     dispatch({ type: "RESET", payload: { initialAttributes } });

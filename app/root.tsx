@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import Modal from "./components/common/Modal";
 
 const queryClient = new QueryClient();
 
@@ -38,8 +39,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <QueryClientProvider client={queryClient}>
           <div className="main-layout">{children}</div>
+          <Modal />
         </QueryClientProvider>
-
         <ScrollRestoration />
         <Scripts />
       </body>
