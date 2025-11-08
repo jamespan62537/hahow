@@ -1,6 +1,7 @@
 import { css, styled } from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   margin-top: 20px;

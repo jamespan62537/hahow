@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime";
 import { useParams } from "react-router";
 
 import {
@@ -13,7 +14,8 @@ import {
 } from "./styles";
 import type { HeroProfileType } from "~/lib/api/heroes/types";
 import usePointCalculation from "~/hooks/heroes/usePointCalculation";
-import { patchHeroProfile } from "~/lib/api/heroes";
+import useHeroProfileMutation from "~/hooks/heroes/useHeroProfileMutation";
+import Loading from "~/components/common/Loading";
 
 type AttributeKey = "str" | "int" | "agi" | "luk";
 
@@ -32,6 +34,7 @@ const HeroProfile = ({
   if (!heroProfile) return null;
 
   const heroId = useParams()?.heroId || "";
+  const { mutateAsync: patchHeroProfile, isPending } = useHeroProfileMutation();
 
   const { profile, remainingPoints, onDecrease, onIncrease } =
     usePointCalculation(heroProfile);
@@ -39,15 +42,16 @@ const HeroProfile = ({
   // TODO: Add error handler
   const handleSaveAttributes = async () => {
     if (remainingPoints > 0) return;
-    await patchHeroProfile(heroId, profile);
+    await patchHeroProfile({ heroId, profile });
   };
 
   return (
     <Container>
+      {isPending && <Loading />}
       <AttributesBlock>
         {AttributesList.map((attr) => (
-          <>
-            <AttributeLabel key={attr.key}>{attr.label}</AttributeLabel>
+          <Fragment key={attr.key}>
+            <AttributeLabel>{attr.label}</AttributeLabel>
             <DecreaseButton
               disabled={profile[attr.key] <= 0}
               onClick={() => onDecrease(attr.key)}
@@ -61,7 +65,7 @@ const HeroProfile = ({
             >
               +
             </IncreaseButton>
-          </>
+          </Fragment>
         ))}
       </AttributesBlock>
       <InfoBlock>

@@ -4,7 +4,6 @@ import HeroProfileSkeleton from "~/components/heroes/HeroProfileSkeleton";
 
 const Hero = () => {
   const { data: heroProfile, isLoading } = useHeroProfileQuery();
-  console.log(isLoading);
 
   return isLoading ? <HeroProfileSkeleton /> : <HeroProfile heroProfile={heroProfile ?? null} />;
 };
