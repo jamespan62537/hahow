@@ -8,7 +8,13 @@ import type { HeroType } from "~/lib/api/heroes/types";
 import useHeroesStore from "~/lib/stores/heroes/heroesStore";
 import useModalStore from "~/lib/stores/common/modalStore";
 
-const HeroList = React.memo(({ heroesList }: { heroesList: HeroType[] }) => {
+const HeroLink = ({
+  hero,
+  children,
+}: {
+  hero: HeroType;
+  children: React.ReactNode;
+}) => {
   const heroId = useParams()?.heroId || "";
   const { isEdited } = useHeroesStore();
   const { openModal } = useModalStore();
@@ -24,15 +30,23 @@ const HeroList = React.memo(({ heroesList }: { heroesList: HeroType[] }) => {
   };
 
   return (
+    <Link
+      key={hero.id}
+      to={heroId && heroId === hero.id ? "/heroes" : `/heroes/${hero.id}`}
+      onClick={handleClick}
+    >
+      {children}
+    </Link>
+  );
+};
+const HeroList = React.memo(({ heroesList }: { heroesList: HeroType[] }) => {
+  return (
     <Container>
       {heroesList.map((hero) => (
-        <Link
-          key={hero.id}
-          to={heroId && heroId === hero.id ? "/heroes" : `/heroes/${hero.id}`}
-          onClick={handleClick}
-        >
+        // encapsulate the Link component to avoid re-render issue
+        <HeroLink key={hero.id} hero={hero}>
           <HeroCard hero={hero} />
-        </Link>
+        </HeroLink>
       ))}
     </Container>
   );
