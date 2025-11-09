@@ -3,7 +3,7 @@ import { errorHandler } from "./api";
 
 function createClient(config = {}) {
   const defaultConfig = {
-    baseURL: process.env.VITE_API_URI,
+    baseURL: import.meta.env.VITE_API_URI,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",

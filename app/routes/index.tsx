@@ -1,9 +1,7 @@
-import { redirect } from "react-router";
-import type { Route } from "../+types/root";
+import { Navigate } from "react-router";
 
-/**
- * doc: https://reactrouter.com/api/utils/redirect
- */
-export async function loader({}: Route.LoaderArgs) {
-  return redirect("/heroes");
-}
+const Index = () => {
+  return <Navigate to="/heroes" replace />;
+};
+
+export default Index;
