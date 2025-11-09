@@ -40,6 +40,10 @@ const HeroLink = ({
   );
 };
 const HeroList = React.memo(({ heroesList }: { heroesList: HeroType[] }) => {
+  if (heroesList.length === 0) {
+    return <div>No heroes found</div>;
+  }
+
   return (
     <Container>
       {heroesList.map((hero) => (

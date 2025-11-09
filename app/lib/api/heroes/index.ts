@@ -1,12 +1,16 @@
 import API from "../createClient";
 import type { HeroType, HeroProfileType } from "./types";
+import { ApiError } from "../api";
 
 export const getHeroes = async (): Promise<HeroType[]> => {
   try {
     const response = await API.get("/heroes");
     return response.data;
   } catch (error) {
-    throw error
+    if (error instanceof ApiError) {
+      return [];
+    }
+    throw error;
   }
 };
 
@@ -17,16 +21,21 @@ export const getHeroProfile = async (
     const response = await API.get(`/heroes/${heroId}/profile`);
     return response.data;
   } catch (error) {
-    throw error
+    if (error instanceof ApiError) {
+      return null;
+    }
+    throw error;
   }
 };
 
-export const patchHeroProfile = async (heroId: string, profile: HeroProfileType) => {
+export const patchHeroProfile = async (
+  heroId: string,
+  profile: HeroProfileType
+) => {
   try {
     const response = await API.patch(`/heroes/${heroId}/profile`, profile);
     return response.data;
   } catch (error) {
-    throw error
+    throw error;
   }
 };
-

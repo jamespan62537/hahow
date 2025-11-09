@@ -9,6 +9,7 @@ function createClient(config = {}) {
       Accept: "application/json",
     },
     validateStatus: (status: number) => status >= 200 && status < 300,
+    timeout: 5000,
   };
 
   const API = axios.create({ ...defaultConfig, ...config });

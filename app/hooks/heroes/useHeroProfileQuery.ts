@@ -12,6 +12,7 @@ const useHeroProfileQuery = () => {
       return response;
     },
     enabled: !!heroId,
+    refetchOnWindowFocus: false,
   });
 };
 

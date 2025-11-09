@@ -9,6 +9,7 @@ const useHeroesListQuery = () =>
       const heroes = await getHeroes();
       return heroes;
     },
+    refetchOnWindowFocus: false,
   });
 
 export default useHeroesListQuery;
