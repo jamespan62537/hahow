@@ -10,7 +10,8 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  width: 719px;
+  width: 100%;
+  max-width: 719px;
   margin: 0 auto;
   padding: 20px;
 }
