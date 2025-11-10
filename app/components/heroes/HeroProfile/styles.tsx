@@ -9,6 +9,11 @@ export const Container = styled.div`
   background-color: #f0f0f0;
   border-radius: 7px;
   padding: 20px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 `;
 
 export const AttributesBlock = styled.div`
@@ -66,11 +71,20 @@ export const InfoBlock = styled.div`
   grid-template-rows: repeat(4, 1fr);
   gap: 20px;
   align-items: start;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+  }
 `;
 
 export const RemainingPoints = styled.div`
   grid-row: 3;
   align-self: end;
+
+  @media (max-width: 480px) {
+    grid-row: 1;
+  }
 `;
 
 export const SaveButton = styled.div<{ disabled: boolean }>`
@@ -86,4 +100,10 @@ export const SaveButton = styled.div<{ disabled: boolean }>`
       opacity: 0.5;
       cursor: not-allowed;
     `}
+
+  @media (max-width: 480px) {
+    grid-row: 2;
+    text-align: center;
+
+  }
 `;
