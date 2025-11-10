@@ -77,18 +77,18 @@ Presentation Components (components/)
 1. TanStack Query (Reat Query)
 * 理解：提供資料 cache、請求狀態、資料取得機制，另外也可減少狀態管理 (Redux) 的依賴減少許多程式碼
 * 使用原因：
- * 自動處理 loading, error 狀態
- * 針對資料做 cache，可減少 api request
- * 對於 api 的使用或操作更有封裝性
+  * 自動處理 loading, error 狀態
+  * 針對資料做 cache，可減少 api request
+  * 對於 api 的使用或操作更有封裝性
 2. Zustand
 * 理解：較輕量化的狀態管理工具，且語法簡潔
 * 使用原因：
- * 相較於 provider, Redux 都還要簡潔，易於上手、加速開發
+  * 撰寫上相較於 provider, Redux 都還要簡潔，易於上手、加速開發
 3. Styled Component
 * 理解：CSS-in-JS，支援 props、主題等操作
 * 使用原因：
- * 動態樣式的設定相對方便
- * 樣式與元件耦合，易於維護
+  * 動態樣式的設定相對方便
+  * 樣式與元件耦合，易於維護
 
 ## 程式碼註解原則
 1. JSDoc
